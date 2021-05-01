@@ -1,4 +1,4 @@
-# Automated testing with Jest and Puppeteer
+# Automated scraper with Puppeteer
 
 ## 1. Setup project
 
@@ -40,54 +40,14 @@
     cd pptr-scraper && git init -y
 
     rem: install packages
-    npm install puppeteer prettier
-```
-
-### 1.3 Config jest
-
-```bat
-    :: in window
-    .\node_modules\.bin\jest --init
-
-    :: in linux or mac
-    ./node_modules/.bin/jest --init
-```
-
-> Would you like to use Jest when running "test" script in "package.json"? ... yes
-> √ Would you like to use Typescript for the configuration file? ... no
-> √ Choose the test environment that will be used for testing » node
-> √ Do you want Jest to add coverage reports? ... no
-> √ Which provider should be used to instrument code for coverage? » babel
-> √ Automatically clear mock calls and instances between every test? ... no
-
-```js
-// jest.config.js
-// rem for handling by myself
-// testEnvironment: "node",
-preset: "jest-puppeteer",
-bail: 5,
-```
-
-```js
-// babel.config.js
-module.exports = {
-    presets: [
-        [
-            "@babel/preset-env",
-            {
-                targets: {
-                    node: "current",
-                }
-            }
-        ]
-    ],
-};
+    npm install puppeteer prettier random-useragent
 ```
 
 ```json
 // package.json
-"scripts": {
-    "test": "jest --forceExit"
+  "scripts": {
+    "scraper": "node scraper.js",
+    "scraper:3": "for run in {1..3}; do node scraper.js; done"
   },
 ```
 
