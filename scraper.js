@@ -5,6 +5,7 @@
  */
 const puppeteer = require('puppeteer');
 const random_useragent = require('random-useragent');
+const fs = require('fs');
 const { url } = require('./config');
 
 // ;()();
@@ -30,6 +31,21 @@ const { url } = require('./config');
     const priceTrim = price.trim();
 
     console.log({nameTrim, priceTrim});
+
+    // get current date and time
+    const date = new Date();
+    const day = date.getDate();
+    const month = date.getMonth();
+    const year = date.getFullYear();
+    const fullDate = `${day}/${month}/${year}`;
+
+    console.log(fullDate + " " + nameTrim + " " + priceTrim);
+
+
+    // save data to the text file ('a' => append to EOF)
+    const logger = fs.createWriteStream('log.txt', {flags: 'a'});
+    logger.write(`${fullDate} - ${nameTrim} - ${priceTrim}\n`);
+    logger.close();
 
     // close browser
     await browser.close();
